@@ -1,0 +1,62 @@
+.language-site-header {
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 max(5vw, 24px);
+  border-bottom: 1px solid #e7e6de;
+  background: #fffefa;
+}
+
+.language-picker {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 9px;
+  border: 1px solid #e7e6de;
+  border-radius: 7px;
+  color: #60665c;
+  font-size: 12px;
+}
+
+.language-picker select {
+  max-width: 125px;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font: 600 11px "Segoe UI", Arial, sans-serif;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+.language-picker select:focus-visible {
+  outline: 3px solid #82ad84;
+  outline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+  .language-site-header {
+    min-height: 46px;
+    padding-right: 14px;
+    padding-left: 14px;
+  }
+
+  .language-picker {
+    gap: 3px;
+    padding: 5px;
+  }
+
+  .language-picker select {
+    max-width: 93px;
+    font-size: 10px;
+  }
+}

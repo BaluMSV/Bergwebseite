@@ -1,0 +1,122 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  color-scheme: light;
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #252a24;
+  background: #f6f5f0;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  padding: 36px 22px 48px;
+}
+
+.content-page {
+  width: min(760px, 100%);
+  margin: 0 auto;
+  padding: 30px;
+  border: 1px solid #e7e6de;
+  border-radius: 12px;
+  background: #fffefa;
+  box-shadow: 0 4px 18px rgba(43, 49, 36, .035);
+}
+
+.back-link {
+  color: #286849;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.eyebrow {
+  margin: 28px 0 7px;
+  color: #286849;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(30px, 5vw, 42px);
+  letter-spacing: -1px;
+}
+
+.region-list-intro {
+  margin: 14px 0 22px;
+  color: #73786e;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.region-list {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.region-item {
+  padding: 17px 19px;
+  border: 1px solid #e7e6de;
+  border-radius: 9px;
+  background: #fff;
+}
+
+.region-item h2 {
+  margin: 0 0 8px;
+  font-size: 17px;
+}
+
+.region-item h2 a {
+  color: #286849;
+  font-weight: 700;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.region-item h2 a:hover {
+  color: #20563c;
+}
+
+.region-item p {
+  margin: 0;
+  color: #73786e;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.region-item .region-travel-time {
+  margin-top: 8px;
+  color: #42483e;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+a:focus-visible {
+  outline: 3px solid #83ab87;
+  outline-offset: 3px;
+}
+
+@media (max-width: 620px) {
+  body {
+    padding: 20px 14px 32px;
+  }
+
+  .content-page {
+    padding: 22px 18px;
+  }
+}

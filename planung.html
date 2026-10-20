@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5f0">
+  <title>Planung – Südliches Bayern</title>
+  <link rel="stylesheet" href="planung.css">
+  <script defer src="language.js"></script>
+</head>
+<body>
+  <main>
+    <a id="back-link" class="back-link" href="index.html">← Zurück</a>
+    <p class="eyebrow">Reiseplanung</p>
+    <h1 id="plan-title">Planung</h1>
+    <p id="plan-message">Wähle eine Anreise- oder Tourplanung von einer Gipfelseite aus.</p>
+    <section id="journey-planner" aria-label="Fahrplanauskunft der Deutschen Bahn" hidden>
+      <div class="journey-grid">
+        <form class="journey-card" data-journey-form>
+          <p class="journey-direction">Hinfahrt</p>
+          <h2>Zum Zielbahnhof</h2>
+          <label class="journey-field" for="outbound-origin">Startbahnhof</label>
+          <input id="outbound-origin" name="origin" type="text" value="" autocomplete="off" required>
+          <label class="journey-field" for="outbound-destination">Zielbahnhof</label>
+          <input id="outbound-destination" name="destination" type="text" value="" autocomplete="off" required>
+          <div class="journey-datetime">
+            <label for="outbound-date">Datum<input id="outbound-date" name="date" type="date" required></label>
+            <label for="outbound-time">Abfahrtszeit<input id="outbound-time" name="time" type="time" required></label>
+          </div>
+          <button class="journey-link" type="submit">Verbindung bei der DB suchen <span aria-hidden="true">↗</span></button>
+          <p class="journey-error" data-station-error role="alert" hidden></p>
+        </form>
+        <form class="journey-card" data-journey-form>
+          <p class="journey-direction">Rückfahrt</p>
+          <h2>Zurück zum Abfahrtsbahnhof</h2>
+          <label class="journey-field" for="return-origin">Startbahnhof</label>
+          <input id="return-origin" name="origin" type="text" value="" autocomplete="off" required>
+          <label class="journey-field" for="return-destination">Zielbahnhof</label>
+          <input id="return-destination" name="destination" type="text" value="" autocomplete="off" required>
+          <div class="journey-datetime">
+            <label for="return-date">Datum<input id="return-date" name="date" type="date" required></label>
+            <label for="return-time">Abfahrtszeit<input id="return-time" name="time" type="time" required></label>
+          </div>
+          <button class="journey-link" type="submit">Verbindung bei der DB suchen <span aria-hidden="true">↗</span></button>
+          <p class="journey-error" data-station-error role="alert" hidden></p>
+        </form>
+      </div>
+      <p class="journey-note">Start, Ziel, Datum und Abfahrtszeit werden an die Fahrplanauskunft auf bahn.de übergeben. Die Bahnhofsnamen müssen einem hinterlegten Bahnhof entsprechen. Die DB-Suche öffnet sich in einem neuen Tab.</p>
+    </section>
+  </main>
+  <script>
+    const parameters = new URLSearchParams(window.location.search);
+    const type = parameters.get("art");
+    const names = {
+      wank: "Wank",
+      "watzmann-hocheck": "Watzmann Hocheck",
+      nebelhorn: "Nebelhorn",
+      wallberg: "Wallberg",
+      kampenwand: "Kampenwand",
+      "westliche-karwendelspitze": "Westliche Karwendelspitze",
+      zugspitze: "Zugspitze",
+      herzogstand: "Herzogstand",
+      wendelstein: "Wendelstein",
+      brecherspitz: "Brecherspitz",
+      jochberg: "Jochberg",
+      seebensee: "Seebensee",
+      brandnerschrofen: "Brandnerschrofen",
+      laber: "Laber",
+      hoernle: "Hörnle",
+      hochstaufen: "Hochstaufen",
+      jenner: "Jenner",
+      baumgartenschneid: "Baumgartenschneid",
+      brauneck: "Brauneck",
+      taubenstein: "Taubenstein",
+      daniel: "Daniel",
+      pyramidenspitze: "Pyramidenspitze",
+      "berchtesgadener-hochthron": "Berchtesgadener Hochthron",
+      kehlstein: "Kehlstein",
+      gindelalmschneid: "Gindelalmschneid",
+      fockenstein: "Fockenstein",
+      benediktenwand: "Benediktenwand",
+      blomberg: "Blomberg",
+      heimgarten: "Heimgarten",
+      hirschberg: "Hirschberg",
+      krottenkopf: "Krottenkopf",
+      "hoher-fricken": "Hoher Fricken",
+      kramerspitz: "Kramerspitz",
+      eckbauer: "Eckbauer",
+      osterfelderkopf: "Osterfelderkopf",
+      "hohe-kiste": "Hohe Kiste",
+      breitenstein: "Breitenstein",
+      rosskopf: "Roßkopf",
+      rotwand: "Rotwand",
+      leutaschklamm: "Leutaschklamm",
+      "hoher-kranzberg": "Hoher Kranzberg",
+      neureuth: "Neureuth",
+      riederstein: "Riederstein",
+      hoellentalangerhuette: "Höllentalangerhütte",
+      blaueishuette: "Blaueishütte",
+      kreuzjoch: "Kreuzjoch",
+      ferchensee: "Ferchensee",
+      seebergkopf: "Seebergkopf",
+      hochfelln: "Hochfelln",
+      "ehrwalder-alm": "Ehrwalder Alm",
+      wettersteinalm: "Wettersteinalm",
+      dammkarhuette: "Dammkarhütte"
+    };
+    const dbStations = {
+      garmischPartenkirchen: { name: "Garmisch-Partenkirchen", id: "8002187" },
+      berchtesgaden: { name: "Berchtesgaden Hbf", id: "8000885" },
+      oberstdorf: { name: "Oberstdorf", id: "8004585" },
+      tegernsee: { name: "Tegernsee", id: "8007632" },
+      aschau: { name: "Aschau(Chiemgau)", id: "8000621" },
+      mittenwald: { name: "Mittenwald", id: "8004043" },
+      kochel: { name: "Kochel", id: "8003355" },
+      bayrischzell: { name: "Bayrischzell", id: "8000834" },
+      fischhausenNeuhaus: { name: "Fischhausen-Neuhaus", id: "8001998" },
+      kufstein: { name: "Kufstein", id: "8100001" },
+      ehrwald: { name: "Ehrwald-Zugspitzbahn", id: "8100089" },
+      fuessen: { name: "Füssen", id: "8002156" },
+      oberammergau: { name: "Oberammergau", id: "8004503" },
+      badKohlgrub: { name: "Bad Kohlgrub", id: "8000716" },
+      ruhpolding: { name: "Ruhpolding", id: "8005222" },
+      badReichenhall: { name: "Bad Reichenhall", id: "8000737" },
+      lenggries: { name: "Lenggries", id: "8003643" },
+      schliersee: { name: "Schliersee", id: "8005367" },
+      gmund: { name: "Gmund(Tegernsee)", id: "8007631" },
+      benediktbeuern: { name: "Benediktbeuern", id: "8000869" },
+      badToelz: { name: "Bad Tölz", id: "8000758" },
+      ohlstadt: { name: "Ohlstadt", id: "8004662" },
+      eschenlohe: { name: "Eschenlohe", id: "8001880" },
+      farchant: { name: "Farchant", id: "8001961" },
+      oberau: { name: "Oberau", id: "8004506" },
+      fischbachau: { name: "Fischbachau", id: "8001992" },
+      laehn: { name: "Lähn", id: "8100553" },
+      salzburg: { name: "Salzburg Hbf", id: "8100002" },
+      muenchenHbf: { name: "München Hbf", id: "8000261" },
+      muenchenOst: { name: "München Ost", id: "8000262" },
+      muenchenPasing: { name: "München-Pasing", id: "8004158" },
+      donnersbergerbruecke: { name: "München Donnersbergerbrücke", id: "8004128" },
+      harras: { name: "München Harras", id: "8004130" }
+    };
+    const stations = {
+      wank: dbStations.garmischPartenkirchen,
+      "watzmann-hocheck": dbStations.berchtesgaden,
+      nebelhorn: dbStations.oberstdorf,
+      wallberg: dbStations.tegernsee,
+      kampenwand: dbStations.aschau,
+      "westliche-karwendelspitze": dbStations.mittenwald,
+      zugspitze: dbStations.garmischPartenkirchen,
+      herzogstand: dbStations.kochel,
+      wendelstein: dbStations.bayrischzell,
+      brecherspitz: dbStations.fischhausenNeuhaus,
+      jochberg: dbStations.kochel,
+      seebensee: dbStations.ehrwald,
+      brandnerschrofen: dbStations.fuessen,
+      laber: dbStations.oberammergau,
+      hoernle: dbStations.badKohlgrub,
+      hochstaufen: dbStations.badReichenhall,
+      jenner: dbStations.berchtesgaden,
+      baumgartenschneid: dbStations.tegernsee,
+      brauneck: dbStations.lenggries,
+      taubenstein: dbStations.fischhausenNeuhaus,
+      daniel: dbStations.laehn,
+      pyramidenspitze: dbStations.kufstein,
+      "berchtesgadener-hochthron": dbStations.salzburg,
+      kehlstein: dbStations.berchtesgaden,
+      gindelalmschneid: dbStations.schliersee,
+      fockenstein: dbStations.gmund,
+      benediktenwand: dbStations.benediktbeuern,
+      blomberg: dbStations.badToelz,
+      heimgarten: dbStations.ohlstadt,
+      hirschberg: dbStations.tegernsee,
+      krottenkopf: dbStations.eschenlohe,
+      "hoher-fricken": dbStations.farchant,
+      kramerspitz: dbStations.garmischPartenkirchen,
+      eckbauer: dbStations.garmischPartenkirchen,
+      osterfelderkopf: dbStations.garmischPartenkirchen,
+      "hohe-kiste": dbStations.eschenlohe,
+      breitenstein: dbStations.fischbachau,
+      rosskopf: dbStations.fischhausenNeuhaus,
+      rotwand: dbStations.fischhausenNeuhaus,
+      leutaschklamm: dbStations.mittenwald,
+      "hoher-kranzberg": dbStations.mittenwald,
+      neureuth: dbStations.tegernsee,
+      riederstein: dbStations.tegernsee,
+      hoellentalangerhuette: dbStations.garmischPartenkirchen,
+      blaueishuette: dbStations.berchtesgaden,
+      kreuzjoch: dbStations.garmischPartenkirchen,
+      ferchensee: dbStations.mittenwald,
+      seebergkopf: dbStations.bayrischzell,
+      hochfelln: dbStations.ruhpolding,
+      "ehrwalder-alm": dbStations.ehrwald,
+      wettersteinalm: dbStations.garmischPartenkirchen,
+      dammkarhuette: dbStations.mittenwald
+    };
+    const departureStations = {
+      Hauptbahnhof: dbStations.muenchenHbf,
+      Ostbahnhof: dbStations.muenchenOst,
+      Pasing: dbStations.muenchenPasing,
+      Donnersbergerbrücke: dbStations.donnersbergerbruecke,
+      Harras: dbStations.harras
+    };
+    const stationsByName = new Map(
+      Object.values(dbStations).map(station => [station.name.toLocaleLowerCase("de"), station])
+    );
+    stationsByName.set("aschau im chiemgau", dbStations.aschau);
+    stationsByName.set("berchtesgaden", dbStations.berchtesgaden);
+    stationsByName.set("kochel am see", dbStations.kochel);
+    stationsByName.set("gmund", dbStations.gmund);
+    const summitId = parameters.get("gipfel");
+    const summit = names[summitId];
+    if (summit && (type === "anreise" || type === "tour")) {
+      const activity = type === "anreise" ? "Anreise" : "Tour";
+      document.title = `${activity} planen – ${summit}`;
+      document.querySelector("#plan-title").textContent = `${activity} planen`;
+      document.querySelector("#plan-message").textContent = type === "anreise"
+        ? `Fahrplanauskunft für ${summit}.`
+        : `Hier kann später die Tourenplanung für ${summit} eingebunden werden.`;
+      document.querySelector("#back-link").href = `${parameters.get("gipfel")}.html`;
+      document.querySelector("#back-link").textContent = `← Zurück zu ${summit}`;
+
+      if (type === "anreise") {
+        let selectedStation = "Hauptbahnhof";
+        try {
+          const savedStation = window.localStorage.getItem("departure-station");
+          if (savedStation && Object.hasOwn(departureStations, savedStation)) {
+            selectedStation = savedStation;
+          }
+        } catch (error) {
+          console.error("Der gespeicherte Abfahrtsbahnhof konnte nicht gelesen werden.", error);
+        }
+
+        const origin = departureStations[selectedStation];
+        const destination = stations[summitId];
+        const journeyPlanner = document.querySelector("#journey-planner");
+        const [outboundForm, returnForm] = journeyPlanner.querySelectorAll("[data-journey-form]");
+        outboundForm.elements.origin.value = origin.name;
+        outboundForm.elements.destination.value = destination.name;
+        returnForm.elements.origin.value = destination.name;
+        returnForm.elements.destination.value = origin.name;
+
+        const now = new Date();
+        now.setMinutes(Math.ceil((now.getMinutes() + 1) / 15) * 15, 0, 0);
+        const defaultDate = [
+          now.getFullYear(),
+          String(now.getMonth() + 1).padStart(2, "0"),
+          String(now.getDate()).padStart(2, "0")
+        ].join("-");
+        const defaultTime = [
+          String(now.getHours()).padStart(2, "0"),
+          String(now.getMinutes()).padStart(2, "0")
+        ].join(":");
+
+        journeyPlanner.querySelectorAll('input[type="date"]').forEach(input => {
+          input.min = defaultDate;
+          input.value = defaultDate;
+        });
+        journeyPlanner.querySelectorAll('input[type="time"]').forEach(input => {
+          input.value = defaultTime;
+        });
+
+        journeyPlanner.querySelectorAll("[data-journey-form]").forEach(form => {
+          form.addEventListener("submit", event => {
+            event.preventDefault();
+            const formData = new FormData(form);
+            const from = stationsByName.get(String(formData.get("origin")).trim().toLocaleLowerCase("de"));
+            const to = stationsByName.get(String(formData.get("destination")).trim().toLocaleLowerCase("de"));
+            const stationError = form.querySelector("[data-station-error]");
+            if (!from || !to) {
+              stationError.textContent = "Bitte verwende einen der hinterlegten Bahnhöfe, damit die DB-Suche den Bahnhof eindeutig erkennt.";
+              stationError.hidden = false;
+              return;
+            }
+            stationError.hidden = true;
+            const departureDateTime = `${formData.get("date")}T${formData.get("time")}:00`;
+            const query = new URLSearchParams({
+              sts: "true",
+              soid: `A=1@O=${from.name}@L=${from.id}@`,
+              zoid: `A=1@O=${to.name}@L=${to.id}@`,
+              kl: "2",
+              sot: "ST",
+              zot: "ST",
+              hd: departureDateTime,
+              hza: "D",
+              hz: "[]",
+              ar: "false",
+              s: "false",
+              d: "false",
+              vm: "00,01,02,03,04,05,06,07,08,09",
+              fm: "false",
+              bp: "false",
+              dlt: "false",
+              dltv: "false"
+            });
+            window.open(
+              `https://www.bahn.de/buchung/fahrplan/suche#${query.toString().replace(/\+/g, "%20")}`,
+              "_blank",
+              "noopener,noreferrer"
+            );
+            window.location.assign(
+              `feedback.html?gipfel=${encodeURIComponent(summitId)}`
+            );
+          });
+        });
+
+        journeyPlanner.hidden = false;
+      }
+    }
+  </script>
+</body>
+</html>

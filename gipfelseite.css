@@ -1,0 +1,263 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  color-scheme: light;
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #252a24;
+  background: #f6f5f0;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  padding: 30px 22px 44px;
+}
+
+.summit-page {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 20px;
+  color: #286849;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.back-link:hover,
+.plan-link:hover {
+  text-decoration: underline;
+}
+
+.summit-title {
+  margin: 0 0 23px;
+  font-size: clamp(30px, 5vw, 44px);
+  letter-spacing: -1.2px;
+}
+
+.quadrants {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(260px, auto));
+  gap: 16px;
+}
+
+.quadrant {
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid #e7e6de;
+  border-radius: 12px;
+  background: #fffefa;
+  box-shadow: 0 4px 18px rgba(43, 49, 36, .035);
+}
+
+.quadrant h2 {
+  margin: 0 0 16px;
+  font-size: 17px;
+  letter-spacing: -.3px;
+}
+
+.facts-list {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.facts-list li {
+  display: grid;
+  grid-template-columns: minmax(95px, .8fr) minmax(0, 1.2fr);
+  gap: 12px;
+  align-items: start;
+  padding: 13px 0;
+  border-bottom: 1px solid #efeee8;
+}
+
+.facts-list li:first-child {
+  padding-top: 3px;
+}
+
+.facts-list li:last-child {
+  border-bottom: 0;
+}
+
+.facts-list li > span {
+  color: #7c8177;
+  font-size: 11px;
+}
+
+.facts-list li > strong {
+  color: #3b4238;
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.difficulty {
+  justify-self: start;
+  padding: 4px 10px;
+  border-radius: 20px;
+  color: #fff !important;
+  text-transform: capitalize;
+}
+
+.difficulty-blau {
+  background: #3479bb;
+}
+
+.difficulty-rot {
+  background: #c7483e;
+}
+
+.difficulty-schwarz {
+  background: #272b27;
+}
+
+.gallery-quadrant {
+  display: flex;
+  flex-direction: column;
+}
+
+.slideshow {
+  position: relative;
+  flex: 1;
+  min-height: 195px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #e4ebe7;
+}
+
+.slide-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 195px;
+  object-fit: cover;
+}
+
+.slide-arrow {
+  position: absolute;
+  top: 50%;
+  width: 37px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  padding: 0 0 4px;
+  transform: translateY(-50%);
+  border: 1px solid rgba(255, 255, 255, .8);
+  border-radius: 20px;
+  background: rgba(255, 254, 250, .92);
+  color: #26332b;
+  cursor: pointer;
+  font: 400 30px/1 "Segoe UI", Arial, sans-serif;
+  box-shadow: 0 2px 9px rgba(20, 30, 23, .15);
+}
+
+.slide-arrow:hover {
+  background: #fff;
+}
+
+.slide-previous {
+  left: 12px;
+}
+
+.slide-next {
+  right: 12px;
+}
+
+.slide-counter {
+  position: absolute;
+  right: 11px;
+  bottom: 10px;
+  padding: 5px 8px;
+  border-radius: 20px;
+  background: rgba(25, 32, 26, .68);
+  color: #fff;
+  font-size: 10px;
+}
+
+.travel-quadrant,
+.tour-quadrant {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.travel-quadrant > p,
+.tour-quadrant > p {
+  margin: 0 0 17px;
+  color: #73786e;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.travel-quadrant > .travel-duration {
+  margin-top: -8px;
+  color: #286849;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.plan-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: auto;
+  padding: 9px 12px;
+  border: 1px solid #dce8dc;
+  border-radius: 7px;
+  background: #edf4ec;
+  color: #286849;
+  font-size: 11px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.sample-note {
+  margin: 15px 2px 0;
+  color: #878b82;
+  font-size: 10px;
+  line-height: 1.6;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid #83ab87;
+  outline-offset: 3px;
+}
+
+@media (max-width: 680px) {
+  body {
+    padding: 22px 14px 32px;
+  }
+
+  .quadrants {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+    gap: 12px;
+  }
+
+  .quadrant {
+    min-height: 235px;
+    padding: 17px;
+  }
+
+  .gallery-quadrant {
+    min-height: 290px;
+  }
+
+  .slideshow,
+  .slide-image {
+    min-height: 215px;
+  }
+}

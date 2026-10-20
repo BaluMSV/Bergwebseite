@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5f0">
+  <title>Danke für deine Tour – Südliches Bayern</title>
+  <link rel="stylesheet" href="feedback.css">
+  <script defer src="language.js"></script>
+  <script defer src="feedback.js"></script>
+</head>
+<body>
+  <main>
+    <a class="back-link" data-summit-link href="index.html">← Zur Karte</a>
+    <p class="eyebrow">Südliches Bayern</p>
+    <h1>Dankeschön!</h1>
+    <p class="feedback-intro">Ich hoffe, du konntest eine schöne Tour planen. Teile mir gerne mit, wie es war, oder gib mir Feedback zur Seite.</p>
+    <section class="feedback-section" aria-labelledby="feedback-title">
+      <h2 id="feedback-title">Dein Kommentar</h2>
+      <form class="feedback-form" id="feedback-form" novalidate>
+        <label for="feedback-name">Name</label>
+        <input id="feedback-name" name="name" type="text" autocomplete="name" required>
+
+        <label for="feedback-email">E-Mail-Adresse</label>
+        <input id="feedback-email" name="email" type="email" autocomplete="email" required>
+
+        <label for="feedback-comment">Kommentar oder Feedback</label>
+        <textarea id="feedback-comment" name="message" rows="6" placeholder="Wie war deine Tour? Was können wir an der Seite verbessern?" required></textarea>
+
+        <input class="feedback-honeypot" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="feedback-submit" type="submit">Abschicken</button>
+        <p class="feedback-note" id="feedback-setup-note">Der E-Mail-Versand wird aktiviert, sobald der Web3Forms-Schlüssel in der Website eingetragen ist.</p>
+        <p class="feedback-note">Nach der Aktivierung werden deine Angaben über Web3Forms verarbeitet und per E-Mail weitergeleitet.</p>
+        <p class="feedback-toast" id="feedback-toast" role="alert" aria-live="assertive" hidden></p>
+      </form>
+    </section>
+  </main>
+  <script>
+    const summitNames = {
+      wank: "Wank",
+      "watzmann-hocheck": "Watzmann Hocheck",
+      nebelhorn: "Nebelhorn",
+      wallberg: "Wallberg",
+      kampenwand: "Kampenwand",
+      "westliche-karwendelspitze": "Westliche Karwendelspitze",
+      zugspitze: "Zugspitze",
+      herzogstand: "Herzogstand",
+      wendelstein: "Wendelstein",
+      brecherspitz: "Brecherspitz",
+      jochberg: "Jochberg",
+      seebensee: "Seebensee",
+      brandnerschrofen: "Brandnerschrofen",
+      laber: "Laber",
+      hoernle: "Hörnle",
+      hochstaufen: "Hochstaufen",
+      jenner: "Jenner",
+      baumgartenschneid: "Baumgartenschneid"
+    };
+    const summitId = new URLSearchParams(window.location.search).get("gipfel");
+    const summitName = summitNames[summitId];
+    if (summitName) {
+      const summitLink = document.querySelector("[data-summit-link]");
+      summitLink.href = `${encodeURIComponent(summitId)}.html`;
+      summitLink.textContent = `← Zurück zum Gipfel: ${summitName}`;
+    }
+  </script>
+</body>
+</html>

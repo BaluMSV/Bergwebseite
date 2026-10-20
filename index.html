@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#e9e8e0">
+  <meta name="description" content="Wandern mit dem Zug ab München: Entdecke Bahnlinien, Wanderregionen und Gipfel im südlichen Bayern.">
+  <title>Geheime-Webseite.de – Wandern mit dem Zug ab München</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <label class="language-picker" for="site-language">
+      <span aria-hidden="true">🌐</span>
+      <span class="visually-hidden">Sprache wählen</span>
+      <select id="site-language" name="language" aria-label="Sprache wählen">
+        <option value="de" data-flag="🇩🇪">🇩🇪 Deutsch</option>
+        <option value="en" data-flag="🇬🇧">🇬🇧 English</option>
+        <option value="es" data-flag="🇪🇸">🇪🇸 Español</option>
+      </select>
+    </label>
+    <div class="site-masthead">
+      <a class="site-title" href="#start">Geheime-Webseite.de</a>
+      <p>Zum Wandern mit dem Zug ab München in die Berge</p>
+    </div>
+  </header>
+
+  <main id="start">
+    <nav class="home-tiles" aria-label="Themen">
+      <a class="home-tile" href="wank.html" data-weekly-summit>
+        <span class="home-tile-label">Tour der Woche</span>
+        <span class="home-tile-arrow" aria-hidden="true">↗</span>
+      </a>
+      <a class="home-tile" href="wanderregionen.html">
+        <span class="home-tile-label">Wanderregionen</span>
+        <span class="home-tile-arrow" aria-hidden="true">↗</span>
+      </a>
+      <a class="home-tile" href="tipps-zum-wandern.html">
+        <span class="home-tile-label">Tipps zum Wandern mit der Bahn</span>
+        <span class="home-tile-arrow" aria-hidden="true">↗</span>
+      </a>
+      <a class="home-tile" href="bahnlinien.html">
+        <span class="home-tile-label">Bahnlinien</span>
+        <span class="home-tile-arrow" aria-hidden="true">↗</span>
+      </a>
+    </nav>
+
+    <section class="map-section" id="karte" aria-labelledby="map-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Interaktive Übersicht</p>
+          <h1 id="map-title">Bahnverbindungen von München in die Berge</h1>
+          <p class="intro-copy">Plane deine nächste Bahnfahrt in die Berge.</p>
+        </div>
+        <span class="map-hint">Karte verschieben und zoomen</span>
+      </div>
+      <section class="route-planner" aria-label="Einstellungen für die Tourensuche">
+        <div class="planner-top-row">
+          <label class="planner-field" for="departure-station">
+            <span class="planner-label">Abfahrtsbahnhof</span>
+            <select id="departure-station" name="departure-station">
+              <option selected>Hauptbahnhof</option>
+              <option>Ostbahnhof</option>
+              <option>Pasing</option>
+              <option>Donnersbergerbrücke</option>
+              <option>Harras</option>
+            </select>
+          </label>
+          <label class="transfer-limit-field" for="maximum-transfers">
+            <span class="planner-label">Maximale Umstiege</span>
+            <span class="duration-value" id="maximum-transfers-value" aria-live="polite">0</span>
+            <input id="maximum-transfers" name="maximum-transfers" type="range" min="0" max="2" step="1" value="0">
+            <span class="range-labels" aria-hidden="true"><span>0</span><span>1</span><span>2</span></span>
+          </label>
+          <fieldset class="journey-field">
+            <legend class="planner-label">Tourart</legend>
+            <div class="journey-switch">
+              <input id="journey-roundtrip" type="radio" name="journey-type" value="roundtrip" checked>
+              <label for="journey-roundtrip">Rundtour</label>
+              <input id="journey-oneway" type="radio" name="journey-type" value="oneway">
+              <label for="journey-oneway">A nach B</label>
+            </div>
+          </fieldset>
+        </div>
+        <div class="planner-controls-row">
+          <label class="duration-field" for="arrival-duration">
+            <span class="planner-label">Maximale Anreisedauer</span>
+            <span class="duration-value" id="duration-value" aria-live="polite">75 min</span>
+            <input id="arrival-duration" name="arrival-duration" type="range" min="0" max="220" step="5" value="75">
+            <span class="range-labels" aria-hidden="true"><span>0 min</span><span>3 Std. 40 min</span></span>
+          </label>
+          <form class="search-field" id="tour-search-form" role="search">
+            <label class="planner-label" for="tour-search">Tourensuche</label>
+            <div class="search-input-row">
+              <input id="tour-search" name="tour-search" type="search" placeholder="Gipfel suchen …">
+              <button type="submit">Suchen</button>
+            </div>
+            <span class="search-feedback" id="tour-search-feedback" role="alert" aria-live="assertive" hidden>Kein Treffer.</span>
+          </form>
+        </div>
+      </section>
+      <div class="map-frame">
+        <div id="map" aria-label="Interaktive OpenStreetMap des südlichen Bayerns"></div>
+      </div>
+    </section>
+
+    <section class="info-section" id="info" aria-labelledby="info-title">
+      <p class="eyebrow">Über diese Karte</p>
+      <h2 id="info-title">Orte und Wege entdecken</h2>
+      <p>Die Karte zeigt Bahnverbindungen, Wanderwege und Gipfel im südlichen Bayern. Klicke auf ein Lokomotivsymbol oder eine Bahnlinie, um das Ziel zu öffnen. Fahre über ein Gipfelsymbol oder eine gepunktete Wanderlinie, um die Details aufzurufen. Ziele, Verläufe und Bilddateien lassen sich im Hintergrund anpassen.</p>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <a href="impressum.html">Impressum</a>
+    <a href="datenschutz.html">Datenschutz</a>
+    <a href="kontakt.html">Kontakt</a>
+  </footer>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="language.js"></script>
+  <script src="data/Zielbahnhöfe.js"></script>
+  <script src="data/summits.js"></script>
+  <script src="tour-der-woche.js"></script>
+  <script src="data/Bahnlinien.js"></script>
+  <script src="data/hikes.js"></script>
+  <script src="data/mountainRegions.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

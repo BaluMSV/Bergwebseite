@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5f0">
+  <title>Unterwegshalt – Geheime-Webseite.de</title>
+  <link rel="stylesheet" href="seiten.css">
+  <script defer src="language.js"></script>
+</head>
+<body>
+  <main class="content-page">
+    <a class="back-link" href="index.html">← Zurück zur Karte</a>
+    <p class="eyebrow">Bahnlinie · südliches Bayern</p>
+    <h1 id="stop-name">Unterwegshalt</h1>
+    <p class="placeholder-note">Dieser Zwischenhalt liegt auf der Bahnlinie <strong id="line-name">Bahnverbindung</strong>. Die Angaben zum Halt werden später ergänzt.</p>
+    <p class="placeholder-note" id="coordinates"></p>
+  </main>
+  <script>
+    const parameters = new URLSearchParams(window.location.search);
+    const stopName = parameters.get("halt");
+    const lineName = parameters.get("linie");
+    const latitude = Number(parameters.get("breite"));
+    const longitude = Number(parameters.get("laenge"));
+
+    if (stopName) {
+      document.querySelector("#stop-name").textContent = stopName;
+      document.title = `${stopName} – Geheime-Webseite.de`;
+    }
+    if (lineName) {
+      document.querySelector("#line-name").textContent = lineName;
+    }
+    if (Number.isFinite(latitude) && Number.isFinite(longitude)) {
+      document.querySelector("#coordinates").textContent =
+        `Lage: ${latitude.toFixed(4)}, ${longitude.toFixed(4)}`;
+    }
+  </script>
+</body>
+</html>
