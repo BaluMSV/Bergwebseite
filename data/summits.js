@@ -16,7 +16,7 @@ window.BahnbergeData.summits = [
       image: "images/watzmann-hocheck.svg",
       coordinates: [47.5584230, 12.9237899],
       page: "watzmann-hocheck.html",
-      busRequired: false
+      busRequired: true
     },
     {
       name: "Nebelhorn",
@@ -32,7 +32,7 @@ window.BahnbergeData.summits = [
       color: "#2878b9",
       coordinates: [47.6658847, 11.7967506],
       page: "wallberg.html",
-      busRequired: false
+      busRequired: true
     },
     {
       name: "Kampenwand",
@@ -64,7 +64,7 @@ window.BahnbergeData.summits = [
       color: "#2878b9",
       coordinates: [47.6134565, 11.3084925],
       page: "herzogstand.html",
-      busRequired: false
+      busRequired: true
     },
     {
       name: "Wendelstein",
@@ -152,7 +152,7 @@ window.BahnbergeData.summits = [
       color: "#2878b9",
       coordinates: [47.5756849, 13.0203822],
       page: "jenner.html",
-      busRequired: false
+      busRequired: true
     },
     {
       name: "Baumgartenschneid",
@@ -296,7 +296,7 @@ window.BahnbergeData.summits = [
       color: "#c7473d",
       coordinates: [47.4385328, 11.0498311],
       page: "osterfelderkopf.html",
-      busRequired: false
+      busRequired: true
     },
     {
       name: "Hohe Kiste",
@@ -377,7 +377,7 @@ window.BahnbergeData.summits = [
       color: "#2878b9",
       coordinates: [47.4379217, 11.0251602],
       page: "hoellentalangerhuette.html",
-      busRequired: false
+      busRequired: true
     },
     {
       name: "Blaueishütte",
@@ -385,7 +385,7 @@ window.BahnbergeData.summits = [
       color: "#2878b9",
       coordinates: [47.5868743, 12.8694913],
       page: "blaueishuette.html",
-      busRequired: false
+      busRequired: true
     },
     {
       name: "Kreuzjoch",

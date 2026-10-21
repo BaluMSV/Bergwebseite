@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bahnberge.de/sitemap.xml

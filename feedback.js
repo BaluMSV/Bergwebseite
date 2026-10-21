@@ -1,17 +1,12 @@
-const WEB3FORMS_ACCESS_KEY = "";
-
 const feedbackForm = document.getElementById("feedback-form");
 
 if (feedbackForm) {
-  const setupNote = document.getElementById("feedback-setup-note");
   const toast = document.getElementById("feedback-toast");
   const submitButton = feedbackForm.querySelector(".feedback-submit");
   const nameInput = feedbackForm.querySelector('[name="name"]');
   const emailInput = feedbackForm.querySelector('[name="email"]');
   const commentInput = feedbackForm.querySelector('[name="message"]');
   let toastTimeout;
-
-  setupNote.hidden = Boolean(WEB3FORMS_ACCESS_KEY);
 
   const showToast = (message, isSuccess = false) => {
     window.clearTimeout(toastTimeout);
@@ -48,23 +43,13 @@ if (feedbackForm) {
       return;
     }
 
-    if (!WEB3FORMS_ACCESS_KEY) {
-      showToast("Der Versand ist noch nicht eingerichtet. Der Web3Forms-Schlüssel muss zuerst eingetragen werden.");
-      return;
-    }
-
     const formData = new FormData(feedbackForm);
-    formData.set("access_key", WEB3FORMS_ACCESS_KEY);
-    formData.set("subject", "Neuer Kommentar von Bahnberge.de");
-    formData.set("from_name", "Bahnberge.de");
-    formData.set("replyto", email);
-    formData.set("message", `Kommentar:\n${comment}\n\nName: ${name}\nE-Mail-Adresse: ${email}`);
 
     submitButton.disabled = true;
     submitButton.textContent = "Wird gesendet ...";
 
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("send-feedback.php", {
         method: "POST",
         body: formData,
         headers: {
@@ -74,13 +59,15 @@ if (feedbackForm) {
       const result = await response.json();
 
       if (!response.ok || !result.success) {
-        throw new Error(result.message || "Der E-Mail-Dienst hat die Nachricht nicht angenommen.");
+        showToast(result.message || "Die Nachricht konnte nicht versendet werden.");
+        return;
       }
 
       feedbackForm.reset();
-      showToast("Danke! Dein Kommentar wurde erfolgreich abgeschickt.", true);
+      showToast("Danke! Deine Nachricht wurde zum Versand übergeben.", true);
     } catch (error) {
-      showToast(`Der Versand ist fehlgeschlagen: ${error.message} Bitte versuche es später erneut.`);
+      showToast("Der Versand ist fehlgeschlagen. Bitte versuche es später erneut.");
+      console.error("Der Kommentar konnte nicht an den Webserver gesendet werden.", error);
     } finally {
       submitButton.disabled = false;
       submitButton.textContent = "Abschicken";

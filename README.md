@@ -44,24 +44,33 @@ Vergleiche in jedem Fall den ausgegebenen Fingerprint mit einer offiziellen
 IONOS-Angabe, bevor du ihn als `SFTP_KNOWN_HOSTS` speicherst.
 Der Workflow löscht keine Dateien auf dem Webspace. Du kannst ihn zum ersten
 Mal unter **Actions > Deploy to IONOS > Run workflow** manuell starten und das
-Ergebnis dort prüfen.
+Ergebnis dort prüfen. Vor jedem Upload erzeugt
+`scripts/generate_sitemap.py` eine neue `sitemap.xml` aus allen HTML-Seiten im
+Projektstamm. Die Sitemap verwendet `https://bahnberge.de` als Hauptdomain und
+wird zusammen mit den übrigen Website-Dateien hochgeladen.
 
 
-## Kommentarformular (Web3Forms)
+## E-Mail-Versand des Kontaktformulars
 
-Die Kommentarformulare auf `feedback.html` und `kontakt.html` verwenden
-[Web3Forms](https://web3forms.com/) für den E-Mail-Versand. Nach dem Erstellen
-des Formulars und der Bestätigung deiner Empfängeradresse:
+Die Formulare auf `feedback.html` und `kontakt.html` senden an
+`send-feedback.php`. Dieses Skript verwendet die PHP-Mailfunktion des IONOS-
+Webhostings; Absender und Empfänger sind standardmäßig `info@bahnberge.de`.
+Die E-Mail-Adresse der absendenden Person wird als Antwortadresse verwendet.
+Es ist kein Web3Forms-Konto und kein im Browser gespeichertes Mailbox-Passwort
+erforderlich.
 
-1. Kopiere den Access Key aus Web3Forms.
-2. Öffne `feedback.js` und füge den Schlüssel in `WEB3FORMS_ACCESS_KEY` ein.
-3. Der Access Key ist mit der Empfängeradresse verknüpft. Bei einem späteren
-   Wechsel der Empfängeradresse generiere einen neuen Schlüssel und ersetze
-   denselben Wert in `feedback.js`.
+Der automatische IONOS-Upload überträgt auch `send-feedback.php` und den
+Ordner `private`. Die Mailadressen in `private/feedback-mail.php` sind bereits
+auf `info@bahnberge.de` gesetzt. `private/.htaccess` sperrt den direkten
+Webzugriff auf die Konfiguration; das PHP-Skript schützt sie zusätzlich vor
+direktem Aufruf. Sende nach dem Upload ein Testformular über die gehostete
+Website und prüfe den Posteingang sowie den Spam-Ordner.
 
-Der Access Key ist laut Web3Forms für die Verwendung im Browser vorgesehen.
-Name, E-Mail-Adresse und Kommentar werden an Web3Forms übertragen; der
-Kommentar wird in der E-Mail zusammen mit Name und E-Mail-Adresse aufgeführt.
+Der IONOS-Webserver muss PHP-Mail mit der Absenderadresse der eigenen Domain
+zulassen. Sollte IONOS den Versand über `mail()` im gebuchten Tarif nicht
+zulassen oder die Nachricht nicht zustellen, kann der Endpunkt auf
+authentifiziertes SMTP umgestellt werden; SMTP-Zugangsdaten gehören ebenfalls
+nur in die nicht versionierte `private/feedback-mail.php`.
 
 ## Busanforderung bei Gipfeln
 

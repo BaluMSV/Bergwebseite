@@ -19,18 +19,17 @@
       <h2 id="feedback-title">Dein Kommentar</h2>
       <form class="feedback-form" id="feedback-form" novalidate>
         <label for="feedback-name">Name</label>
-        <input id="feedback-name" name="name" type="text" autocomplete="name" required>
+        <input id="feedback-name" name="name" type="text" maxlength="100" autocomplete="name" required>
 
         <label for="feedback-email">E-Mail-Adresse</label>
-        <input id="feedback-email" name="email" type="email" autocomplete="email" required>
+        <input id="feedback-email" name="email" type="email" maxlength="254" autocomplete="email" required>
 
         <label for="feedback-comment">Kommentar oder Feedback</label>
-        <textarea id="feedback-comment" name="message" rows="6" placeholder="Wie war deine Tour? Was können wir an der Seite verbessern?" required></textarea>
+        <textarea id="feedback-comment" name="message" rows="6" maxlength="2500" placeholder="Wie war deine Tour? Was können wir an der Seite verbessern?" required></textarea>
 
         <input class="feedback-honeypot" type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true">
         <button class="feedback-submit" type="submit">Abschicken</button>
-        <p class="feedback-note" id="feedback-setup-note">Der E-Mail-Versand wird aktiviert, sobald der Web3Forms-Schlüssel in der Website eingetragen ist.</p>
-        <p class="feedback-note">Nach der Aktivierung werden deine Angaben über Web3Forms verarbeitet und per E-Mail weitergeleitet.</p>
+        <p class="feedback-note">Dein Kommentar wird über den Website-Server per E-Mail weitergeleitet.</p>
         <p class="feedback-toast" id="feedback-toast" role="alert" aria-live="assertive" hidden></p>
       </form>
     </section>
