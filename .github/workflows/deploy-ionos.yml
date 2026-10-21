@@ -38,7 +38,13 @@ jobs:
           printf '%s\n' "$SFTP_KNOWN_HOSTS" > "$HOME/.ssh/known_hosts"
           chmod 600 "$HOME/.ssh/known_hosts"
 
-          printf 'cd "%s"\nput -r ./*\n' "$SFTP_TARGET_DIR" > "$RUNNER_TEMP/sftp-batch"
+          if [[ -z "$SFTP_TARGET_DIR" ]]; then
+            echo "SFTP_TARGET_DIR must be set to the website destination."
+            exit 1
+          fi
+
+          printf -- '-mkdir "%s"\ncd "%s"\nput -r ./*\n' \
+            "$SFTP_TARGET_DIR" "$SFTP_TARGET_DIR" > "$RUNNER_TEMP/sftp-batch"
           SSHPASS="$SFTP_PASSWORD" sshpass -e sftp \
             -o StrictHostKeyChecking=yes \
             -o UserKnownHostsFile="$HOME/.ssh/known_hosts" \
