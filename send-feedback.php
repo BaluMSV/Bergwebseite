@@ -99,7 +99,8 @@ $headers = [
     'Content-Transfer-Encoding: quoted-printable'
 ];
 
-if (!mail($recipient, $subject, quoted_printable_encode($body), implode("\r\n", $headers))) {
+$mailOptions = '-f' . escapeshellarg($sender);
+if (!mail($recipient, $subject, quoted_printable_encode($body), implode("\r\n", $headers), $mailOptions)) {
     error_log('Kontaktformular: IONOS-PHP-mail() konnte die Nachricht nicht annehmen.');
     respond(502, ['success' => false, 'message' => 'IONOS konnte die Nachricht nicht annehmen. Bitte versuche es später erneut.']);
 }

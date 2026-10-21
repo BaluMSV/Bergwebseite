@@ -67,10 +67,12 @@ direktem Aufruf. Sende nach dem Upload ein Testformular über die gehostete
 Website und prüfe den Posteingang sowie den Spam-Ordner.
 
 Der IONOS-Webserver muss PHP-Mail mit der Absenderadresse der eigenen Domain
-zulassen. Sollte IONOS den Versand über `mail()` im gebuchten Tarif nicht
-zulassen oder die Nachricht nicht zustellen, kann der Endpunkt auf
-authentifiziertes SMTP umgestellt werden; SMTP-Zugangsdaten gehören ebenfalls
-nur in die nicht versionierte `private/feedback-mail.php`.
+zulassen. Das Skript setzt `info@bahnberge.de` sowohl im `From`-Header als auch
+als Envelope-Absender (`-f`), damit die gewünschte Adresse für sichtbaren
+Absender und Rückläufer verwendet wird. Sollte IONOS den Versand über `mail()`
+im gebuchten Tarif nicht zulassen oder die Nachricht nicht zustellen, kann der
+Endpunkt auf authentifiziertes SMTP umgestellt werden; SMTP-Zugangsdaten
+gehören ebenfalls nur in die nicht versionierte `private/feedback-mail.php`.
 
 ## Busanforderung bei Gipfeln
 
