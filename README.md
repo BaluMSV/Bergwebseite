@@ -24,6 +24,27 @@ werden an deren Browser gesendet. Ein privates Repository schützt den
 Repository-Zugriff, nicht den Code, der für eine öffentliche Website benötigt
 wird.
 
+## Automatischer Upload zu IONOS
+
+Der Workflow `.github/workflows/deploy-ionos.yml` lädt die Dateien bei jedem
+Push auf `main` zusätzlich per SFTP auf den IONOS-Webspace. Lege dafür unter
+**Settings > Secrets and variables > Actions** folgende Repository-Secrets an:
+
+- `SFTP_HOST`: Servername aus den IONOS-SFTP-Zugangsdaten
+- `SFTP_PORT`: SFTP-Port, üblicherweise `22`
+- `SFTP_USERNAME`: SFTP-Benutzername
+- `SFTP_PASSWORD`: SFTP-Passwort
+- `SFTP_KNOWN_HOSTS`: geprüfter SSH-Hostkey des SFTP-Servers im OpenSSH-Format
+- `SFTP_TARGET_DIR`: vorhandener Ordner im Webspace, der als Dokumentenstamm
+  für die Domain konfiguriert ist
+
+Den Hostkey erhältst du von IONOS oder mit `ssh-keyscan -p <Port> <Host>`.
+Vergleiche in jedem Fall den ausgegebenen Fingerprint mit einer offiziellen
+IONOS-Angabe, bevor du ihn als `SFTP_KNOWN_HOSTS` speicherst.
+Der Zielordner muss bereits existieren. Der Workflow löscht keine Dateien auf
+dem Webspace. Du kannst ihn zum ersten Mal unter **Actions > Deploy to IONOS >
+Run workflow** manuell starten und das Ergebnis dort prüfen.
+
 
 ## Kommentarformular (Web3Forms)
 
