@@ -41,6 +41,13 @@ Der Access Key ist laut Web3Forms für die Verwendung im Browser vorgesehen.
 Name, E-Mail-Adresse und Kommentar werden an Web3Forms übertragen; der
 Kommentar wird in der E-Mail zusammen mit Name und E-Mail-Adresse aufgeführt.
 
+## Busanforderung bei Gipfeln
+
+In `data/summits.js` kann bei jedem Gipfeleintrag `busRequired` auf `true` oder
+`false` gesetzt werden. Bei `true` wird der Gipfel beim Ausgrauen so behandelt,
+als wären für die Anreise 30 Minuten und ein Umstieg zusätzlich erforderlich.
+Ohne Angabe oder bei `false` bleibt die bisherige Berechnung unverändert.
+
 ## Outdooractive-Links
 
 Die Tour-Schaltfläche auf den Gipfelseiten heißt **Details** und führt weiterhin

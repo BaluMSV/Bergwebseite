@@ -155,6 +155,9 @@
     });
     const assignedSummits = new Set(Object.keys(summitRegionAssignments || {}));
     summits.forEach(summit => {
+      if (summit.busRequired !== undefined && typeof summit.busRequired !== "boolean") {
+        throw new Error(`Für den Gipfel „${summit.name}“ muss „busRequired“ true oder false sein.`);
+      }
       const regionName = summitRegionAssignments?.[summit.page];
       if (!regionName || !mountainRegions.some(region => region.name === regionName)) {
         throw new Error(`Für den Gipfel „${summit.name}“ fehlt eine gültige Gebirgsregion.`);
@@ -991,9 +994,11 @@
       const { marker, summit, muted } = entry;
       const regionName = summitRegionAssignments[summit.page];
       const region = mountainRegions.find(candidate => candidate.name === regionName);
+      const travelTime = region.travelTimes[station] + (summit.busRequired ? 30 : 0);
+      const transferCount = region.transferCounts[station] + (summit.busRequired ? 1 : 0);
       const shouldMute =
-        region.travelTimes[station] > limit ||
-        region.transferCounts[station] > transferLimit;
+        travelTime > limit ||
+        transferCount > transferLimit;
       if (shouldMute !== muted) {
         marker.setIcon(createSummitIcon(summit, shouldMute));
         entry.muted = shouldMute;
