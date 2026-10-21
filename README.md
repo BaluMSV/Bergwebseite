@@ -35,15 +35,16 @@ Push auf `main` zusätzlich per SFTP auf den IONOS-Webspace. Lege dafür unter
 - `SFTP_USERNAME`: SFTP-Benutzername
 - `SFTP_PASSWORD`: SFTP-Passwort
 - `SFTP_KNOWN_HOSTS`: geprüfter SSH-Hostkey des SFTP-Servers im OpenSSH-Format
-- `SFTP_TARGET_DIR`: vorhandener Ordner im Webspace, der als Dokumentenstamm
-  für die Domain konfiguriert ist
+- `SFTP_TARGET_DIR`: Ordner im Webspace, der als Dokumentenstamm für die Domain
+  konfiguriert ist. Falls er noch nicht existiert, erstellt der Workflow ihn;
+  sein übergeordneter Ordner muss bereits vorhanden sein.
 
 Den Hostkey erhältst du von IONOS oder mit `ssh-keyscan -p <Port> <Host>`.
 Vergleiche in jedem Fall den ausgegebenen Fingerprint mit einer offiziellen
 IONOS-Angabe, bevor du ihn als `SFTP_KNOWN_HOSTS` speicherst.
-Der Zielordner muss bereits existieren. Der Workflow löscht keine Dateien auf
-dem Webspace. Du kannst ihn zum ersten Mal unter **Actions > Deploy to IONOS >
-Run workflow** manuell starten und das Ergebnis dort prüfen.
+Der Workflow löscht keine Dateien auf dem Webspace. Du kannst ihn zum ersten
+Mal unter **Actions > Deploy to IONOS > Run workflow** manuell starten und das
+Ergebnis dort prüfen.
 
 
 ## Kommentarformular (Web3Forms)
