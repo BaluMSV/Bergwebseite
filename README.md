@@ -1,4 +1,4 @@
-# Geheime-Webseite.de
+# Bahnberge.de
 
 Statische Website für Wanderungen mit der Bahn ab München. Die Seiten liegen
 als HTML-, CSS- und JavaScript-Dateien im Projektstamm; ein Build-Schritt ist

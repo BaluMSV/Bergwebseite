@@ -55,8 +55,8 @@ if (feedbackForm) {
 
     const formData = new FormData(feedbackForm);
     formData.set("access_key", WEB3FORMS_ACCESS_KEY);
-    formData.set("subject", "Neuer Kommentar von Geheime-Webseite.de");
-    formData.set("from_name", "Geheime-Webseite.de");
+    formData.set("subject", "Neuer Kommentar von Bahnberge.de");
+    formData.set("from_name", "Bahnberge.de");
     formData.set("replyto", email);
     formData.set("message", `Kommentar:\n${comment}\n\nName: ${name}\nE-Mail-Adresse: ${email}`);
 
