@@ -51,6 +51,8 @@
       : {
           minZoom: 3,
           maxZoom: 18,
+          zoomSnap: 0,
+          zoomDelta: 1,
           maxBounds: regionBounds,
           maxBoundsViscosity: 1
         })
@@ -261,7 +263,15 @@
     map.setMinZoom(minimumZoom);
     if (map.getZoom() < minimumZoom) {
       map.setView(regionBounds.getCenter(), minimumZoom, { animate: false });
+    } else {
+      map.panInsideBounds(regionBounds, { animate: false });
     }
+  }
+
+  // Die Kartengröße kann sich auch ohne Fenster-Resize ändern (Layout, Schriften, Browserleisten).
+  function refreshMapSize() {
+    map.invalidateSize({ animate: false });
+    keepRegionVisible();
   }
 
   if (regionView) {
@@ -270,6 +280,11 @@
     map.fitBounds(regionBounds, { animate: false });
     keepRegionVisible();
     map.on("resize", keepRegionVisible);
+    window.addEventListener("load", refreshMapSize);
+    window.addEventListener("orientationchange", refreshMapSize);
+    if ("ResizeObserver" in window) {
+      new ResizeObserver(refreshMapSize).observe(map.getContainer());
+    }
   }
 
   const lineLayer = L.layerGroup().addTo(map);
