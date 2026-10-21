@@ -477,6 +477,15 @@ h1 {
   text-decoration: none;
 }
 
+.visitor-counter {
+  color: #60665c;
+  font-size: 12px;
+}
+
+.visitor-counter[hidden] {
+  display: none;
+}
+
 .site-footer a:hover {
   color: #286849;
   text-decoration: underline;
