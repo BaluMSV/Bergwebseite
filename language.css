@@ -19,13 +19,87 @@
   font-size: 12px;
 }
 
-.language-picker select {
-  max-width: 125px;
+.language-site-header .language-picker {
+  position: relative;
+}
+
+.language-picker-trigger {
   border: 0;
   background: transparent;
   color: inherit;
   cursor: pointer;
   font: 600 11px "Segoe UI", Arial, sans-serif;
+}
+
+.language-picker-options {
+  position: absolute;
+  z-index: 1000;
+  top: calc(100% + 5px);
+  right: 0;
+  min-width: 145px;
+  padding: 4px;
+  border: 1px solid #e7e6de;
+  border-radius: 7px;
+  background: #fffefa;
+  box-shadow: 0 5px 16px rgba(25, 34, 27, .16);
+}
+
+.language-picker-options[hidden] {
+  display: none;
+}
+
+.language-picker-option {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 9px;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: #343b32;
+  cursor: pointer;
+  font: 600 12px "Segoe UI", Arial, sans-serif;
+  text-align: left;
+}
+
+.language-picker-option:hover,
+.language-picker-option[aria-selected="true"] {
+  background: #f0f2ec;
+}
+
+.language-picker-option:focus-visible,
+.language-picker-trigger:focus-visible {
+  outline: 3px solid #82ad84;
+  outline-offset: 2px;
+}
+
+.language-picker-option .language-flag {
+  flex-basis: 22px;
+  width: 22px;
+  height: 15px;
+}
+
+.language-picker-chevron {
+  margin-left: 3px;
+  font-size: 14px;
+}
+
+.language-flag {
+  display: inline-flex;
+  flex: 0 0 20px;
+  width: 20px;
+  height: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(37, 42, 36, .16);
+  border-radius: 2px;
+  background: #fff;
+}
+
+.language-flag svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 .visually-hidden {
@@ -55,8 +129,7 @@
     padding: 5px;
   }
 
-  .language-picker select {
-    max-width: 93px;
+  .language-picker-trigger {
     font-size: 10px;
   }
 }

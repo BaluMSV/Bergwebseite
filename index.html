@@ -11,15 +11,22 @@
 </head>
 <body>
   <header class="site-header">
-    <label class="language-picker" for="site-language">
+    <div class="language-picker">
       <span aria-hidden="true">🌐</span>
       <span class="visually-hidden">Sprache wählen</span>
-      <select id="site-language" name="language" aria-label="Sprache wählen">
-        <option value="de" data-flag="🇩🇪">🇩🇪 Deutsch</option>
-        <option value="en" data-flag="🇬🇧">🇬🇧 English</option>
-        <option value="es" data-flag="🇪🇸">🇪🇸 Español</option>
+      <span class="language-flag" data-language-flag aria-hidden="true">
+        <svg viewBox="0 0 24 16" focusable="false">
+          <path fill="#000" d="M0 0h24v5.34H0z"/>
+          <path fill="#dd0000" d="M0 5.33h24v5.34H0z"/>
+          <path fill="#ffce00" d="M0 10.66h24V16H0z"/>
+        </svg>
+      </span>
+      <select id="site-language" name="language" aria-label="Sprache wählen" hidden>
+        <option value="de" data-flag="de">Deutsch</option>
+        <option value="en" data-flag="en">English</option>
+        <option value="es" data-flag="es">Español</option>
       </select>
-    </label>
+    </div>
     <div class="site-masthead">
       <a class="site-title" href="#start">Bahnberge.de</a>
       <p>Zum Wandern mit dem Zug ab München in die Berge</p>
@@ -67,29 +74,6 @@
               <option>Harras</option>
             </select>
           </label>
-          <label class="transfer-limit-field" for="maximum-transfers">
-            <span class="planner-label">Maximale Umstiege</span>
-            <span class="duration-value" id="maximum-transfers-value" aria-live="polite">0</span>
-            <input id="maximum-transfers" name="maximum-transfers" type="range" min="0" max="2" step="1" value="0">
-            <span class="range-labels" aria-hidden="true"><span>0</span><span>1</span><span>2</span></span>
-          </label>
-          <fieldset class="journey-field">
-            <legend class="planner-label">Tourart</legend>
-            <div class="journey-switch">
-              <input id="journey-roundtrip" type="radio" name="journey-type" value="roundtrip" checked>
-              <label for="journey-roundtrip">Rundtour</label>
-              <input id="journey-oneway" type="radio" name="journey-type" value="oneway">
-              <label for="journey-oneway">A nach B</label>
-            </div>
-          </fieldset>
-        </div>
-        <div class="planner-controls-row">
-          <label class="duration-field" for="arrival-duration">
-            <span class="planner-label">Maximale Anreisedauer</span>
-            <span class="duration-value" id="duration-value" aria-live="polite">75 min</span>
-            <input id="arrival-duration" name="arrival-duration" type="range" min="0" max="220" step="5" value="75">
-            <span class="range-labels" aria-hidden="true"><span>0 min</span><span>3 Std. 40 min</span></span>
-          </label>
           <form class="search-field" id="tour-search-form" role="search">
             <label class="planner-label" for="tour-search">Tourensuche</label>
             <div class="search-input-row">
@@ -98,6 +82,20 @@
             </div>
             <span class="search-feedback" id="tour-search-feedback" role="alert" aria-live="assertive" hidden>Kein Treffer.</span>
           </form>
+        </div>
+        <div class="planner-controls-row">
+          <label class="duration-field" for="arrival-duration">
+            <span class="planner-label">Maximale Anreisedauer</span>
+            <span class="duration-value" id="duration-value" aria-live="polite">75 min</span>
+            <input id="arrival-duration" name="arrival-duration" type="range" min="0" max="220" step="5" value="75">
+            <span class="range-labels" aria-hidden="true"><span>0 min</span><span>3 Std. 40 min</span></span>
+          </label>
+          <label class="transfer-limit-field" for="maximum-transfers">
+            <span class="planner-label">Maximale Umstiege</span>
+            <span class="duration-value" id="maximum-transfers-value" aria-live="polite">0</span>
+            <input id="maximum-transfers" name="maximum-transfers" type="range" min="0" max="2" step="1" value="0">
+            <span class="range-labels" aria-hidden="true"><span>0</span><span>1</span><span>2</span></span>
+          </label>
         </div>
       </section>
       <div class="map-frame">

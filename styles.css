@@ -99,7 +99,7 @@ body {
 .language-picker {
   position: absolute;
   top: 20px;
-  left: max(5vw, 24px);
+  right: max(5vw, 24px);
   display: inline-flex;
   align-items: center;
   gap: 7px;
@@ -224,14 +224,13 @@ h1 {
 
 .planner-top-row {
   display: grid;
-  grid-template-columns: minmax(190px, 1.1fr) minmax(160px, .9fr) minmax(230px, 1.2fr);
+  grid-template-columns: minmax(190px, 1fr) minmax(230px, 1.2fr);
   gap: 18px;
   align-items: end;
 }
 
 .planner-field,
 .transfer-limit-field,
-.journey-field,
 .duration-field {
   min-width: 0;
   margin: 0;
@@ -256,47 +255,6 @@ h1 {
   background: #fff;
   color: #343b32;
   font: 12px "Segoe UI", Arial, sans-serif;
-}
-
-.journey-switch {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  min-height: 39px;
-  padding: 3px;
-  border: 1px solid #e3e5dd;
-  border-radius: 8px;
-  background: #f4f5f0;
-}
-
-.journey-switch input {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  clip-path: inset(50%);
-}
-
-.journey-switch label {
-  display: grid;
-  place-items: center;
-  border-radius: 6px;
-  color: #73786e;
-  cursor: pointer;
-  font-size: 11px;
-  font-weight: 600;
-}
-
-.journey-switch input:checked + label {
-  background: #fffefa;
-  color: #286849;
-  box-shadow: 0 1px 4px rgba(25, 34, 27, .12);
-}
-
-.journey-switch input:focus-visible + label {
-  outline: 3px solid #83ab87;
-  outline-offset: 2px;
 }
 
 .planner-controls-row {
@@ -868,14 +826,12 @@ h1 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .journey-field {
-    grid-column: 1 / -1;
-  }
 }
 
 .site-header a:focus-visible,
 .site-nav a:focus-visible,
 .language-picker select:focus-visible,
+.language-picker-trigger:focus-visible,
 .home-tile:focus-visible,
 .site-footer a:focus-visible,
 .search-input-row input:focus-visible {
@@ -891,7 +847,7 @@ h1 {
 
   .language-picker {
     top: 12px;
-    left: 15px;
+    right: 15px;
     gap: 3px;
     padding: 5px;
   }

@@ -11,6 +11,21 @@ weiterhin Kartenkacheln von OpenStreetMap; beim Anzeigen der Karte stellt der
 Browser deshalb weiterhin eine Verbindung zu deren Kachelservern her. Die
 OpenStreetMap-Attribution wird auf den Karten angezeigt.
 
+## Sprachen
+
+Deutsch ist die führende Sprache. Die deutschen HTML-Seiten bleiben die
+inhaltliche Quelle; die lokal gepflegten Übersetzungen für Englisch und
+Spanisch stehen zentral in `language.js` im Objekt `translations`. Es wird
+kein Übersetzungsdienst eingebunden und kein Seitentext zu einem solchen
+Dienst übertragen.
+
+Wenn ein deutscher Text ergänzt oder geändert wird, kann der exakte sichtbare
+Text als Schlüssel in `translations` eingetragen werden. Für jeden Schlüssel
+können `en` und `es` ergänzt werden. Noch nicht eingetragene Texte bleiben in
+der gewählten Sprache deutsch. Die Übersetzungslogik berücksichtigt auch
+dynamisch erzeugte Texte; für variable Textteile gibt es die Regeln in
+`dynamicTranslations`. Die Auswahl wird lokal im Browser gespeichert.
+
 ## GitHub Pages
 
 Der Workflow `.github/workflows/pages.yml` wird manuell gestartet. Für die
