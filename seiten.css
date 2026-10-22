@@ -76,6 +76,23 @@ h1 {
   background: #fff;
 }
 
+.railway-item {
+  position: relative;
+  padding-left: 31px;
+}
+
+.railway-item::before {
+  position: absolute;
+  top: 21px;
+  left: 18px;
+  width: 4px;
+  height: calc(100% - 42px);
+  min-height: 20px;
+  border-radius: 3px;
+  background: var(--railway-color);
+  content: "";
+}
+
 .region-item h2 {
   margin: 0 0 8px;
   font-size: 17px;

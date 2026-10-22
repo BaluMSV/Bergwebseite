@@ -111,7 +111,7 @@ window.BahnbergeData.lines = [
         [47.687766, 11.986826],
         [47.675532, 12.011274]
       ],
-      color: "#4984a1",
+      color: "#d08c38",
       page: "bayrischzell.html"
     },
     {
@@ -128,7 +128,7 @@ window.BahnbergeData.lines = [
         [47.707764, 11.563609],
         [47.680471, 11.573557]
       ],
-      color: "#9a684d",
+      color: "#d08c38",
       page: "lenggries.html"
     },
     {
@@ -146,7 +146,7 @@ window.BahnbergeData.lines = [
         [47.709608, 11.403400], 
         [47.660661, 11.371142]
       ],
-      color: "#63935e",
+      color: "#bb5545",
       page: "kochel-am-see.html"
     },
     {
@@ -215,7 +215,7 @@ window.BahnbergeData.lines = [
         [47.442224, 10.748314], 
         [47.492940, 10.721937]
       ],
-      color: "#568d8c",
+      color: "#bb5545",
       page: "reutte-in-tirol.html"
     },
     {
@@ -247,7 +247,7 @@ window.BahnbergeData.lines = [
         [47.482850, 11.238760],
         [47.439512, 11.265611]
       ],
-      color: "#8b725e",
+      color: "#bb5545",
       page: "mittenwald.html"
     },
     {

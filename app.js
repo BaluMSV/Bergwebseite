@@ -968,7 +968,6 @@
 
   const regionLayers = [];
   const summitMarkers = [];
-  const regionOutlineColor = "#252a24";
   const regionFillColor = "#fffefa";
 
   function formatTravelDuration(minutes, station) {
@@ -1036,9 +1035,13 @@
   }
 
   mountainRegions.forEach(region => {
+    const railwayLine = lines.find(line => line.page === region.railwayPage);
+    if (!railwayLine) {
+      throw new Error(`Für die Gebirgsregion „${region.name}“ ist keine Bahnlinie konfiguriert.`);
+    }
     const area = L.polygon(region.coordinates, {
       pane: "regionPane",
-      color: regionOutlineColor,
+      color: railwayLine.color,
       weight: 1.5,
       opacity: 0.85,
       dashArray: "5 6",
