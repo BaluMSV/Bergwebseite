@@ -4,6 +4,13 @@ Statische Website für Wanderungen mit der Bahn ab München. Die Seiten liegen
 als HTML-, CSS- und JavaScript-Dateien im Projektstamm; ein Build-Schritt ist
 nicht erforderlich.
 
+## Leaflet-Karten
+
+Leaflet 1.9.4 wird lokal aus `vendor/leaflet/dist/` geladen. Die Website nutzt
+weiterhin Kartenkacheln von OpenStreetMap; beim Anzeigen der Karte stellt der
+Browser deshalb weiterhin eine Verbindung zu deren Kachelservern her. Die
+OpenStreetMap-Attribution wird auf den Karten angezeigt.
+
 ## GitHub Pages
 
 Der Workflow `.github/workflows/pages.yml` wird manuell gestartet. Für die
