@@ -46,7 +46,7 @@ jobs:
             exit 1
           fi
 
-          printf -- '-mkdir "%s"\ncd "%s"\nput -r ./*\n' \
+          printf -- '-mkdir "%s"\ncd "%s"\nput .htaccess\nput -r ./*\n' \
             "$SFTP_TARGET_DIR" "$SFTP_TARGET_DIR" > "$RUNNER_TEMP/sftp-batch"
           SSHPASS="$SFTP_PASSWORD" sshpass -e sftp \
             -o StrictHostKeyChecking=yes \
